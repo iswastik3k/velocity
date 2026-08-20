@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.env
+*.secret
+
+# Yazi cache
+home/.config/yazi/plugins/
+home/.config/yazi/flavors/
+
+# Misc
+*.swp
+*.swo
+*~

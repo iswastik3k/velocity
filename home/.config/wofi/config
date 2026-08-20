@@ -1,0 +1,12 @@
+# ~/.config/wofi/config
+show=drun
+width=480
+height=360
+prompt=
+term=kitty
+hide_scroll=true
+show_all=false
+print_command=false
+insensitive=true
+no_actions=true
+drun-print_desktop_file=false

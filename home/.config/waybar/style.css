@@ -1,0 +1,145 @@
+/* ===== VELOCITY - Waybar Style ===== */
+/* Theme: Catppuccin Mocha × Hollow Knight */
+
+/* === PALETTE ===
+   base:     #1e1e2e
+   mantle:   #181825
+   surface0: #313244
+   surface1: #45475a
+   overlay0: #6c7086
+   text:     #cdd6f4
+   subtext1: #bac2de
+   lavender: #b4befe
+   mauve:    #cba6f7
+   red:      #f38ba8
+*/
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background-color: rgba(30, 30, 46, 0.55);
+    border-bottom: 1px solid rgba(49, 50, 68, 0.5);
+}
+
+/* === LEFT === */
+
+.modules-left {
+    padding-left: 8px;
+}
+
+#custom-arch {
+    color: #b4befe;
+    font-size: 16px;
+    padding: 0 14px;
+}
+
+#custom-arch:hover {
+    color: #cba6f7;
+}
+
+#workspaces {
+    padding: 0 4px;
+}
+
+#workspaces button {
+    color: #6c7086;
+    background: transparent;
+    padding: 0 6px;
+    min-width: 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: #bac2de;
+    background: transparent;
+    border-bottom: 2px solid #45475a;
+}
+
+#workspaces button.active {
+    color: #b4befe;
+    border-bottom: 2px solid #b4befe;
+}
+
+#workspaces button.urgent {
+    color: #f38ba8;
+    border-bottom: 2px solid #f38ba8;
+}
+
+/* === CENTER === */
+
+#clock {
+    color: #cdd6f4;
+    font-weight: 600;
+    padding: 0 16px;
+    letter-spacing: 0.3px;
+}
+
+/* === RIGHT === */
+
+.modules-right {
+    padding-right: 8px;
+}
+
+#memory,
+#disk,
+#network,
+#backlight,
+#pulseaudio,
+#battery {
+    color: #bac2de;
+    padding: 0 10px;
+    border-left: 1px solid #313244;
+}
+
+#memory:hover,
+#disk:hover,
+#network:hover,
+#backlight:hover,
+#pulseaudio:hover {
+    color: #cdd6f4;
+}
+
+/* battery states */
+#battery {
+    border-left: 1px solid #313244;
+}
+
+#battery.charging {
+    color: #b4befe;
+}
+
+#battery.warning {
+    color: #f9e2af;
+}
+
+#battery.critical {
+    color: #f38ba8;
+}
+
+#pulseaudio.muted {
+    color: #6c7086;
+}
+
+/* power button */
+#custom-powermenu {
+    color: #f38ba8;
+    padding: 0 12px 0 10px;
+    border-left: 1px solid #313244;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#custom-powermenu:hover {
+    color: #eba0ac;
+    background: #313244;
+}

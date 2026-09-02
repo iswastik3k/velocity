@@ -1,10 +1,4 @@
-cat > install.sh << 'EOF'
 #!/bin/bash
-
-# ===== VELOCITY - Install Script =====
-# Dotfiles installer for Arch Linux
-# Theme: Catppuccin Mocha × Hollow Knight
-# https://github.com/iswastik3k/velocity
 
 set -e
 

@@ -220,6 +220,3 @@ dim "  4. Launch kitty and run: source ~/.zshrc"
 echo ""
 echo -e "${LAVENDER}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
-EOF
-
-chmod +x install.sh

@@ -19,9 +19,13 @@ error()   { echo -e "${RED}  ${TEXT}$1${RESET}"; }
 dim()     { echo -e "${DIM}$1${RESET}"; }
 
 # === BANNER ===
-echo -e "${LAVENDER}"
-figlet -f slant "VELOCITY"
-echo -e "${RESET}"
+# Guarded: figlet may not exist yet on a fresh system, and with `set -e`
+# an unguarded call here would kill the script before package install runs.
+if command -v figlet &> /dev/null; then
+    echo -e "${LAVENDER}"
+    figlet -f slant "VELOCITY"
+    echo -e "${RESET}"
+fi
 dim "  Catppuccin Mocha × Hollow Knight"
 dim "  Arch Linux dotfiles by iswastik3k"
 echo ""
@@ -48,7 +52,14 @@ echo ""
 
 # === PACKAGES ===
 info "Installing packages..."
-yay -S --needed --noconfirm - < packages.txt
+# Previous version piped `packages.txt` directly into `yay -S - < packages.txt`.
+# Plain pacman supports reading targets from stdin via a bare `-`, but yay does
+# not reliably pass that through — it parses targets itself before routing
+# AUR vs repo packages, and blank/comment lines in the file were being read as
+# empty search strings, producing "Query arg too small" errors from the AUR API.
+# Filtering blank lines and comments, then passing targets as real arguments via
+# xargs, avoids both problems.
+grep -v '^\s*#' packages.txt | grep -v '^\s*$' | xargs yay -S --needed --noconfirm
 success "Packages installed."
 echo ""
 
@@ -142,6 +153,11 @@ info "Configuring GTK theme..."
 mkdir -p "$HOME/.config/gtk-3.0"
 mkdir -p "$HOME/.config/gtk-4.0"
 
+# NOTE: cursor-theme-name below assumes a folder name that has not yet been
+# confirmed against what `catppuccin-cursors-mocha` actually installs.
+# Run: ls /usr/share/icons/ | grep -i catppuccin
+# and correct the value below (in both files, and the gsettings call further
+# down) to match the exact folder name before relying on this.
 cat > "$HOME/.config/gtk-3.0/settings.ini" << GTKEOF
 [Settings]
 gtk-theme-name = catppuccin-mocha-lavender-standard+default

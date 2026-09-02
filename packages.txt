@@ -40,7 +40,7 @@ noto-fonts-emoji
 catppuccin-gtk-theme-mocha
 papirus-icon-theme
 sddm-theme-catppuccin
-catppuccin-cursors-mocha-lavender
+catppuccin-cursors-mocha
 
 sddm
 swww

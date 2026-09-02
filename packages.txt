@@ -1,34 +1,21 @@
-# ===== VELOCITY - Package List =====
-# Install with: yay -S --needed - < packages.txt
-# Arch Linux / AUR
-
-# === CORE WM ===
 hyprland
 hyprlock
 hypridle
 hyprpaper
 xdg-desktop-portal-hyprland
 
-# === BAR + LAUNCHER ===
 waybar
 wofi
 
-# === TERMINAL ===
 kitty
 zsh
 starship
 
-# === NOTIFICATIONS ===
 dunst
 libnotify
 
-# === BROWSER ===
 zen-browser-bin
 
-# === EDITOR ===
-code
-
-# === FILE MANAGER ===
 yazi
 ffmpegthumbnailer
 unarchiver
@@ -40,29 +27,24 @@ fzf
 zoxide
 imagemagick
 
-# === MEDIA ===
 mpv
 grimblast-git
 wlopm
 brightnessctl
 wireplumber
 
-# === FONTS ===
 ttf-jetbrains-mono-nerd
 noto-fonts
 noto-fonts-emoji
 
-# === THEME ===
 catppuccin-gtk-theme-mocha
 papirus-icon-theme
 sddm-theme-catppuccin
 catppuccin-cursors-mocha-lavender
 
-# === DISPLAY ===
 sddm
 swww
 
-# === SYSTEM ===
 fastfetch
 btop
 wget

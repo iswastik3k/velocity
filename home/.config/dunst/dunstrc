@@ -53,7 +53,7 @@
 
     # === MISC ===
     dmenu = /usr/bin/wofi --dmenu
-    browser = zen-browser
+    browser = xdg-open
     always_run_script = true
     title = Dunst
     class = Dunst

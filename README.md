@@ -10,6 +10,8 @@ _built on Arch Linux + Hyprland_
 ![Shell](https://img.shields.io/badge/shell-zsh-b4befe?style=flat-square&labelColor=1e1e2e)
 ![License](https://img.shields.io/badge/license-MIT-a6e3a1?style=flat-square&labelColor=1e1e2e)
 
+**Branch:** `variants/catppuccin-mocha`
+
 </div>
 
 ---
@@ -23,37 +25,35 @@ _built on Arch Linux + Hyprland_
 ## Philosophy
 
 Void base. Lavender-blue accent. Frosted glass surfaces.
-Every layer of the stack themed to a single coherent vision —
-Catppuccin Mocha palette rendered through the aesthetic of Hollow Knight.
-Minimal chrome, maximum focus, keyboard-first workflow.
+Catppuccin Mocha rendered through the aesthetic of Hollow Knight —
+minimal chrome, maximum focus, keyboard-first workflow throughout.
 
 ## Stack
 
-| Component      | Tool                      |
-| -------------- | ------------------------- |
-| Window Manager | Hyprland (Lua config)     |
-| Bar            | Waybar                    |
-| Launcher       | Wofi                      |
-| Terminal       | Kitty                     |
-| Shell          | Zsh + Zinit               |
-| Prompt         | Starship                  |
-| Notifications  | Dunst                     |
-| File Manager   | Yazi                      |
-| Browser        | Zen Browser               |
-| Editor         | VS Code                   |
-| Lock Screen    | Hyprlock                  |
-| Idle Daemon    | Hypridle                  |
-| Login Manager  | SDDM                      |
-| System Info    | Fastfetch                 |
-| GTK Theme      | Catppuccin Mocha Lavender |
-| Cursor         | Catppuccin Mocha Lavender |
-| Icons          | Papirus Dark              |
-| Font           | JetBrainsMono Nerd Font   |
-| Wallpaper      | Hollow Knight fanart      |
+| Component      | Tool                       |
+| --------------- | --------------------------- |
+| Window Manager  | Hyprland (Lua config)      |
+| Bar             | Waybar                     |
+| Launcher        | Wofi                       |
+| Terminal        | Kitty                      |
+| Shell           | Zsh + Zinit                |
+| Prompt          | Starship                   |
+| Notifications   | Dunst                      |
+| File Manager    | Yazi                       |
+| Editor          | VS Code                    |
+| Lock Screen     | Hyprlock                   |
+| Idle Daemon     | Hypridle                   |
+| Login Manager   | SDDM                       |
+| System Info     | Fastfetch                  |
+| GTK Theme       | Catppuccin Mocha Lavender  |
+| Cursor          | Catppuccin Mocha Lavender  |
+| Icons           | Papirus Dark                |
+| Font            | JetBrainsMono Nerd Font     |
+| Wallpaper       | Hollow Knight fanart         |
 
 ## Dependencies
 
-All packages are listed in `packages.txt`.
+All packages listed in `packages.txt`.
 
 ```bash
 yay -S --needed - < packages.txt
@@ -66,6 +66,7 @@ yay -S --needed - < packages.txt
 ```bash
 git clone https://github.com/iswastik3k/velocity.git
 cd velocity
+git checkout variants/catppuccin-mocha
 ./install.sh
 ```
 
@@ -83,32 +84,33 @@ Some things require manual attention:
 
 1. **Wallpaper** — copy `assets/hollow-knight.jpg` to `~/Pictures/hollow-knight.jpg`
 2. **VS Code** — install extensions and apply Catppuccin Mocha theme manually
-3. **Zen Browser** — apply `userChrome.css` and `userContent.css` from `assets/zen/`
+3. **Browser** — this build does not prescribe a browser theme; pick and configure your own
 
-## Variants
+## Accent Role Discipline
 
-| Branch               | Palette                   | Status  |
-| -------------------- | ------------------------- | ------- |
-| `main`               | Catppuccin Mocha Lavender | Stable  |
-| `variants/rose-pine` | Rosé Pine                 | Planned |
-| `variants/nord`      | Nord                      | Planned |
-| `variants/gruvbox`   | Gruvbox                   | Planned |
+| Role      | Swatch                                            | Hex       | Usage                            |
+| --------- | -------------------------------------------------- | --------- | ---------------------------------- |
+| Primary   | ![](https://placehold.co/16x16/b4befe/b4befe.png) | `#b4befe` | Active states, focus, borders     |
+| Secondary | ![](https://placehold.co/16x16/cba6f7/cba6f7.png) | `#cba6f7` | Interaction, hover, selection      |
+| Critical  | ![](https://placehold.co/16x16/f38ba8/f38ba8.png) | `#f38ba8` | Errors, powermenu                  |
+| Warning   | ![](https://placehold.co/16x16/f9e2af/f9e2af.png) | `#f9e2af` | Warnings, capslock                 |
+
+Applied consistently across every component — active states use
+lavender, interactive/hover states use mauve, errors use red,
+warnings use yellow. No exceptions.
 
 ## Versioning
 
-Follows semantic versioning.
+Follows semantic versioning, independently per branch.
 
-- `v1.x.x` — Catppuccin Mocha Lavender, current aesthetic
-- `v2.x.x` — Reserved for full rework or new base theme
-
-See [CHANGELOG.md](CHANGELOG.md) for release history.
+See [CHANGELOG.md](CHANGELOG.md) for this variant's release history.
 
 ## License
 
-MIT.
+[MIT](LICENSE)
 
 ---
 
 <div align="center">
-<sub>built by iswastik3k · Arch Linux · 2026</sub>
+<sub>built by iswastik3k · Arch Linux · 2026 · part of the <a href="https://github.com/iswastik3k/velocity">VELOCITY</a> project</sub>
 </div>

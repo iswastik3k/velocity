@@ -140,15 +140,6 @@ Applied consistently across every component — active states use
 rose, interactive/hover states use iris, errors use love, warnings
 use gold. No exceptions.
 
-## Variants
-
-| Branch               | Palette                   | Status  |
-| -------------------- | ------------------------- | ------- |
-| `main`               | Catppuccin Mocha Lavender | Stable  |
-| `variants/rose-pine` | Rosé Pine Moon            | Stable  |
-| `variants/nord`      | Nord                      | Planned |
-| `variants/gruvbox`   | Gruvbox                   | Planned |
-
 ## Versioning
 
 Follows semantic versioning, independently per branch.
@@ -162,5 +153,7 @@ See [CHANGELOG.md](CHANGELOG.md) for this variant's release history.
 ---
 
 <div align="center">
-<sub>built by iswastik3k · Arch Linux · 2026</sub>
+<sub>built by iswastik3k · co-built by claude · Arch Linux · 2026</sub>
+<br>
+<sub>- part of the <a href="https://github.com/iswastik3k/velocity">VELOCITY</a> project -</sub>
 </div>

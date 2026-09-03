@@ -1,59 +1,63 @@
 /* ~/.config/wofi/style.css */
-/* Catppuccin Mocha × Hollow Knight — frosted glass launcher */
+/* Rosé Pine Moon — heavier frost */
 
 window {
-    background-color: rgba(30, 30, 46, 0.75);
-    border: 1px solid rgba(49, 50, 68, 0.6);
-    border-radius: 12px;
+    margin: 0px;
     font-family: "JetBrainsMono Nerd Font";
     font-size: 13px;
-}
-
-#input {
-    background: rgba(49, 50, 68, 0.5);
-    border: 1px solid rgba(69, 71, 90, 0.6);
-    border-radius: 8px;
-    color: #cdd6f4;
-    margin: 12px;
-    padding: 8px 12px;
-    outline: none;
-    caret-color: #b4befe;
-}
-
-#input:focus {
-    border-color: rgba(180, 190, 254, 0.4);
+    font-weight: 500;
+    background-color: rgba(35, 33, 54, 0.75);
+    border: 2px solid #393552;
+    border-radius: 10px;
 }
 
 #outer-box {
-    padding: 4px 8px 12px 8px;
+    margin: 10px;
+    border: none;
+}
+
+#input {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #393552;
+    border-radius: 6px;
+    color: #e0def4;
+    background-color: #2a283e;
+    outline: none;
+    caret-color: #ea9a97;
+}
+
+#input:focus {
+    border: 1px solid #c4a7e7;
 }
 
 #scroll {
-    margin: 0 4px;
+    margin: 5px;
 }
 
 #inner-box {
     background: transparent;
 }
 
-#entry {
-    background: transparent;
-    border-radius: 6px;
-    color: #bac2de;
-    padding: 9px 14px;
-    transition: all 0.15s ease;
-}
-
-#entry:selected {
-    background: rgba(49, 50, 68, 0.7);
-    color: #b4befe;
-    border-left: 2px solid #b4befe;
-}
-
 #text {
-    color: inherit;
+    margin: 5px;
+    color: #908caa;
 }
 
-#img {
-    display: none;
+#entry:selected #text {
+    color: #232136;
+    font-weight: 600;
 }
+
+#entry:selected,
+#entry:selected * {
+    background-color: #ea9a97;
+    border-radius: 6px;
+}
+
+#entry:selected #text {
+    color: #232136;
+    font-weight: 600;
+}
+
+#img { display: none; }

@@ -1,5 +1,3 @@
-# ===== VELOCITY - ZSH Config =====
-
 # === ZINIT BOOTSTRAP ===
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [[ ! -d "$ZINIT_HOME" ]]; then
@@ -20,8 +18,8 @@ zinit light zsh-users/zsh-history-substring-search
 
 # === HISTORY ===
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=3000
+SAVEHIST=5000
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY
@@ -49,8 +47,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # === AUTOSUGGESTION STYLE ===
-# overlay0 from Catppuccin Mocha — subtle, not distracting
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6c7086'
+# muted from Rosé Pine — subtle, not distracting
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6e6a86'
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # === ALIASES ===
@@ -62,12 +60,4 @@ alias cls='clear'
 # === STARSHIP ===
 eval "$(starship init zsh)"
 
-# === YAZI SHELL INTEGRATION ===
-function y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
-}
+export BAT_THEME="rose-pine-moon"

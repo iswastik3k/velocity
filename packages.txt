@@ -1,54 +1,67 @@
+# ===== VELOCITY — Rosé Pine Moon variant =====
+# Install with: yay -S --needed - < packages.txt
+# Arch Linux / AUR
+
+# === CORE WM ===
 hyprland
 hyprlock
 hypridle
 hyprpaper
 xdg-desktop-portal-hyprland
 
+# === BAR + LAUNCHER ===
 waybar
 wofi
 
-kitty
+# === TERMINAL ===
+alacritty
 zsh
 starship
 
+# === NOTIFICATIONS ===
 dunst
 libnotify
 
-zen-browser-bin
 
-yazi
-ffmpegthumbnailer
-unarchiver
-jq
-poppler
-fd
-ripgrep
-fzf
-zoxide
-imagemagick
+# === EDITOR ===
+visual-studio-code-bin
 
+# === FILE MANAGER ===
+dolphin
+qt6ct
+kvantum
+
+# === MEDIA / UTILS ===
 mpv
 grimblast-git
 wlopm
 brightnessctl
 wireplumber
+figlet
 
+# === FONTS ===
 ttf-jetbrains-mono-nerd
+inter-font
 noto-fonts
 noto-fonts-emoji
+noto-fonts-cjk
 
-catppuccin-gtk-theme-mocha
-papirus-icon-theme
-sddm-theme-catppuccin
-catppuccin-cursors-mocha
+# === THEME — Rosé Pine ===
+# NOTE: these AUR packages were sourced manually during build.
+# Check exact package names before automated install; some were
+# hand-installed from GitHub (Kvantum themes, hyprcursor, sddm theme).
+rose-pine-gtk-theme-full
+rose-pine-icons
+rose-pine-hyprcursor
 
+# === DISPLAY ===
 sddm
 swww
 
+# === SYSTEM ===
 fastfetch
 btop
 wget
 curl
 git
 base-devel
-figlet

@@ -1,32 +1,35 @@
 #!/bin/bash
 
+# ===== VELOCITY — Rosé Pine Moon =====
+# Dotfiles installer for Arch Linux
+# https://github.com/iswastik3k/velocity/tree/variants/rose-pine
+
 set -e
 
 # === COLORS ===
-LAVENDER='\033[38;2;180;190;254m'
-MAUVE='\033[38;2;203;166;247m'
-GREEN='\033[38;2;166;227;161m'
-RED='\033[38;2;243;139;168m'
-TEXT='\033[38;2;205;214;244m'
-DIM='\033[38;2;108;112;134m'
+ROSE='\033[38;2;234;154;151m'
+IRIS='\033[38;2;196;167;231m'
+GOLD='\033[38;2;246;193;119m'
+LOVE='\033[38;2;235;111;146m'
+TEXT='\033[38;2;224;222;244m'
+DIM='\033[38;2;110;106;134m'
 RESET='\033[0m'
 
-# === HELPERS ===
-info()    { echo -e "${LAVENDER}  ${TEXT}$1${RESET}"; }
-success() { echo -e "${GREEN}  ${TEXT}$1${RESET}"; }
-warning() { echo -e "${MAUVE}  ${TEXT}$1${RESET}"; }
-error()   { echo -e "${RED}  ${TEXT}$1${RESET}"; }
+info()    { echo -e "${ROSE}  ${TEXT}$1${RESET}"; }
+success() { echo -e "${IRIS}  ${TEXT}$1${RESET}"; }
+warning() { echo -e "${GOLD}  ${TEXT}$1${RESET}"; }
+error()   { echo -e "${LOVE}  ${TEXT}$1${RESET}"; }
 dim()     { echo -e "${DIM}$1${RESET}"; }
 
 # === BANNER ===
-# Guarded: figlet may not exist yet on a fresh system, and with `set -e`
-# an unguarded call here would kill the script before package install runs.
+echo -e "${ROSE}"
 if command -v figlet &> /dev/null; then
-    echo -e "${LAVENDER}"
     figlet -f slant "VELOCITY"
-    echo -e "${RESET}"
+else
+    echo "VELOCITY"
 fi
-dim "  Catppuccin Mocha × Hollow Knight"
+echo -e "${RESET}"
+dim "  Rosé Pine Moon"
 dim "  Arch Linux dotfiles by iswastik3k"
 echo ""
 
@@ -52,14 +55,7 @@ echo ""
 
 # === PACKAGES ===
 info "Installing packages..."
-# Previous version piped `packages.txt` directly into `yay -S - < packages.txt`.
-# Plain pacman supports reading targets from stdin via a bare `-`, but yay does
-# not reliably pass that through — it parses targets itself before routing
-# AUR vs repo packages, and blank/comment lines in the file were being read as
-# empty search strings, producing "Query arg too small" errors from the AUR API.
-# Filtering blank lines and comments, then passing targets as real arguments via
-# xargs, avoids both problems.
-grep -v '^\s*#' packages.txt | grep -v '^\s*$' | xargs yay -S --needed --noconfirm
+grep -vE "^s*#|^s*$" packages.txt | yay -S --needed --noconfirm -
 success "Packages installed."
 echo ""
 
@@ -91,22 +87,21 @@ deploy() {
     success "Linked: $1"
 }
 
-# Config files
 deploy ".config/hypr/hyprland.lua"
 deploy ".config/hypr/hyprlock.conf"
 deploy ".config/hypr/hypridle.conf"
 deploy ".config/waybar/config.jsonc"
 deploy ".config/waybar/style.css"
-deploy ".config/kitty/kitty.conf"
+deploy ".config/alacritty/alacritty.toml"
 deploy ".config/wofi/config"
 deploy ".config/wofi/style.css"
 deploy ".config/wofi/power.css"
 deploy ".config/dunst/dunstrc"
 deploy ".config/fastfetch/config.jsonc"
 deploy ".config/starship.toml"
-deploy ".config/yazi/yazi.toml"
-deploy ".config/yazi/keymap.toml"
-deploy ".config/yazi/theme.toml"
+deploy ".config/fontconfig/fonts.conf"
+deploy ".config/Code/User/settings.json"
+deploy ".config/Code/User/keybindings.json"
 deploy ".zshrc"
 deploy ".local/bin/powermenu.sh"
 
@@ -128,12 +123,50 @@ else
 fi
 echo ""
 
+# === FONT CACHE ===
+info "Rebuilding font cache..."
+fc-cache -f
+success "Font cache rebuilt."
+echo ""
+
+# === ROSÉ PINE MANUAL ASSETS ===
+info "Installing Rosé Pine theme assets from GitHub..."
+
+# Kvantum theme
+mkdir -p "$HOME/.config/Kvantum"
+if [ ! -d "$HOME/.config/Kvantum/rose-pine-moon-rose" ]; then
+    git clone --depth 1 https://github.com/rose-pine/kvantum.git /tmp/rose-pine-kvantum 2>/dev/null
+    if [ -d /tmp/rose-pine-kvantum ]; then
+        cp -r /tmp/rose-pine-kvantum/* "$HOME/.config/Kvantum/" 2>/dev/null
+        success "Kvantum Rosé Pine theme installed."
+    else
+        warning "Kvantum theme clone failed — install manually from github.com/rose-pine/kvantum"
+    fi
+else
+    success "Kvantum Rosé Pine theme already present."
+fi
+
+# SDDM theme
+if [ ! -d /usr/share/sddm/themes/rose-pine ]; then
+    git clone --depth 1 https://github.com/lwndhrst/sddm-rose-pine.git /tmp/sddm-rose-pine 2>/dev/null
+    if [ -d /tmp/sddm-rose-pine ]; then
+        sudo mkdir -p /usr/share/sddm/themes/rose-pine
+        sudo cp -r /tmp/sddm-rose-pine/* /usr/share/sddm/themes/rose-pine/
+        success "SDDM Rosé Pine theme installed."
+    else
+        warning "SDDM theme clone failed — install manually from github.com/lwndhrst/sddm-rose-pine"
+    fi
+else
+    warning "SDDM Rosé Pine theme already present — skipping."
+fi
+echo ""
+
 # === SDDM ===
 info "Configuring SDDM..."
 if [ ! -f /etc/sddm.conf ]; then
     sudo bash -c 'cat > /etc/sddm.conf << SDDMEOF
 [Theme]
-Current=catppuccin-mocha-lavender
+Current=rose-pine
 
 [General]
 HaltCommand=/usr/bin/systemctl poweroff
@@ -143,51 +176,90 @@ SDDMEOF'
 else
     warning "SDDM config already exists at /etc/sddm.conf — skipping."
 fi
-
 sudo systemctl enable sddm 2>/dev/null || true
 echo ""
 
-# === GTK ===
-info "Configuring GTK theme..."
+# === GTK / QT ===
+info "Configuring GTK and Qt theme..."
 
 mkdir -p "$HOME/.config/gtk-3.0"
 mkdir -p "$HOME/.config/gtk-4.0"
 
-# NOTE: cursor-theme-name below assumes a folder name that has not yet been
-# confirmed against what `catppuccin-cursors-mocha` actually installs.
-# Run: ls /usr/share/icons/ | grep -i catppuccin
-# and correct the value below (in both files, and the gsettings call further
-# down) to match the exact folder name before relying on this.
 cat > "$HOME/.config/gtk-3.0/settings.ini" << GTKEOF
 [Settings]
-gtk-theme-name = catppuccin-mocha-lavender-standard+default
-gtk-icon-theme-name = Papirus-Dark
-gtk-cursor-theme-name = catppuccin-mocha-lavender-cursors
-gtk-cursor-theme-size = 24
-gtk-font-name = JetBrainsMono Nerd Font 11
-gtk-application-prefer-dark-theme = true
-gtk-button-images = false
-gtk-menu-images = false
-gtk-enable-animations = true
+gtk-theme-name=rose-pine-moon-gtk
+gtk-icon-theme-name=rose-pine-moon-icons
+gtk-cursor-theme-name=rose-pine-hyprcursor
+gtk-cursor-theme-size=24
+gtk-font-name=Inter 10
+gtk-application-prefer-dark-theme=1
+gtk-button-images=0
+gtk-menu-images=0
+gtk-enable-event-sounds=0
+gtk-enable-input-feedback-sounds=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintslight
+gtk-xft-rgba=rgb
 GTKEOF
 
 cat > "$HOME/.config/gtk-4.0/settings.ini" << GTKEOF
 [Settings]
-gtk-theme-name = catppuccin-mocha-lavender-standard+default
-gtk-icon-theme-name = Papirus-Dark
-gtk-cursor-theme-name = catppuccin-mocha-lavender-cursors
-gtk-cursor-theme-size = 24
-gtk-font-name = JetBrainsMono Nerd Font 11
-gtk-application-prefer-dark-theme = true
+gtk-theme-name=rose-pine-moon-gtk
+gtk-icon-theme-name=rose-pine-moon-icons
+gtk-cursor-theme-name=rose-pine-hyprcursor
+gtk-cursor-theme-size=24
+gtk-font-name=Inter 10
+gtk-application-prefer-dark-theme=1
 GTKEOF
 
-gsettings set org.gnome.desktop.interface gtk-theme 'catppuccin-mocha-lavender-standard+default' 2>/dev/null || true
-gsettings set org.gnome.desktop.interface cursor-theme 'catppuccin-mocha-lavender-cursors' 2>/dev/null || true
-gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' 2>/dev/null || true
-gsettings set org.gnome.desktop.interface cursor-size 24 2>/dev/null || true
-gsettings set org.gnome.desktop.interface font-name 'JetBrainsMono Nerd Font 11' 2>/dev/null || true
+cat > "$HOME/.config/kdeglobals" << KDEEOF
+[General]
+ColorScheme=RosePineMoon
+Name=Rose Pine Moon
+widgetStyle=kvantum
 
-success "GTK theme configured."
+[Colors:Window]
+BackgroundNormal=35,33,54
+ForegroundNormal=224,222,244
+
+[Colors:View]
+BackgroundNormal=42,39,62
+ForegroundNormal=224,222,244
+
+[Colors:Selection]
+BackgroundNormal=196,167,231
+ForegroundNormal=35,33,54
+
+[Colors:Button]
+BackgroundNormal=57,53,82
+ForegroundNormal=224,222,244
+
+[Icons]
+Theme=rose-pine-moon-icons
+
+[KDE]
+widgetStyle=kvantum
+KDEEOF
+
+gsettings set org.gnome.desktop.interface gtk-theme 'rose-pine-moon-gtk' 2>/dev/null || true
+gsettings set org.gnome.desktop.interface cursor-theme 'rose-pine-hyprcursor' 2>/dev/null || true
+gsettings set org.gnome.desktop.interface icon-theme 'rose-pine-moon-icons' 2>/dev/null || true
+gsettings set org.gnome.desktop.interface cursor-size 24 2>/dev/null || true
+gsettings set org.gnome.desktop.interface font-name 'Inter 10' 2>/dev/null || true
+
+success "GTK, Qt, and Kvantum configured."
+echo ""
+
+# === KVANTUM ACTIVATION ===
+info "Activating Kvantum theme..."
+if command -v kvantummanager &> /dev/null; then
+    kvantummanager --set rose-pine-moon-rose 2>/dev/null || \
+        warning "Could not auto-set Kvantum theme — run 'kvantummanager' manually and select rose-pine-moon-rose."
+    success "Kvantum theme activated."
+else
+    warning "kvantummanager not found — install kvantum package."
+fi
 echo ""
 
 # === ZINIT ===
@@ -201,38 +273,35 @@ else
 fi
 echo ""
 
-# === YAZI PLUGINS ===
-info "Installing yazi plugins..."
-if command -v ya &> /dev/null; then
-    ya pack -a yazi-rs/flavors#catppuccin-mocha 2>/dev/null || warning "Catppuccin flavor install failed — install manually."
-    ya pack -a yazi-rs/plugins#zoxide 2>/dev/null || warning "Zoxide plugin install failed — install manually."
-    success "Yazi plugins installed."
-else
-    warning "ya not found — install yazi plugins manually after launch."
-fi
-echo ""
-
-# === WALLPAPER ===
+# === WALLPAPERS ===
 info "Wallpaper setup..."
 mkdir -p "$HOME/Pictures"
-if [ -f "$DOTFILES_DIR/assets/hollow-knight.jpg" ]; then
-    cp "$DOTFILES_DIR/assets/hollow-knight.jpg" "$HOME/Pictures/hollow-knight.jpg"
-    success "Wallpaper copied to ~/Pictures/"
+if [ -f "$DOTFILES_DIR/assets/rose-pine-desktop.jpg" ]; then
+    cp "$DOTFILES_DIR/assets/rose-pine-desktop.jpg" "$HOME/Pictures/rose-pine-desktop.jpg"
+    success "Desktop wallpaper copied to ~/Pictures/"
 else
-    warning "Wallpaper not found in assets/ — copy hollow-knight.jpg to ~/Pictures/ manually."
+    warning "Desktop wallpaper not found in assets/ — copy manually."
+fi
+if [ -f "$DOTFILES_DIR/assets/rose-pine-lock.jpg" ]; then
+    cp "$DOTFILES_DIR/assets/rose-pine-lock.jpg" "$HOME/Pictures/rose-pine-lock.jpg"
+    success "Lock screen wallpaper copied to ~/Pictures/"
+else
+    warning "Lock screen wallpaper not found in assets/ — copy manually."
 fi
 echo ""
 
 # === DONE ===
-echo -e "${LAVENDER}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
+echo -e "${ROSE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
-success "VELOCITY installed successfully."
+success "VELOCITY (Rosé Pine Moon) installed successfully."
 echo ""
 dim "  Next steps:"
-dim "  1. Copy your wallpaper to ~/Pictures/hollow-knight.jpg if not done"
-dim "  2. Log out and back in, or reboot"
-dim "  3. Select Hyprland from SDDM"
-dim "  4. Launch kitty and run: source ~/.zshrc"
+dim "  1. Log out and back in, or reboot"
+dim "  2. Select Hyprland from SDDM"
+dim "  3. Confirm hyprpaper is pointing to ~/Pictures/rose-pine-desktop.jpg"
+dim "  4. Launch alacritty and run: source ~/.zshrc"
+dim "  5. Install VS Code extension: code --install-extension mvllow.rose-pine"
+dim "  6. If Kvantum didn't auto-apply, run: kvantummanager"
 echo ""
-echo -e "${LAVENDER}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
+echo -e "${ROSE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""

@@ -1,0 +1,136 @@
+{
+    // === THEME ===
+    "workbench.colorTheme": "Rosé Pine Moon",
+    "workbench.iconTheme": "rose-pine-icons",
+
+    // === FONT ===
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', monospace",
+    "editor.fontSize": 13,
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "400",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono'",
+    "terminal.integrated.fontSize": 12,
+
+    // === EDITOR CHROME — minimal ===
+    "workbench.activityBar.location": "hidden",
+    "workbench.sideBar.location": "right",
+    "workbench.statusBar.visible": true,
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    "workbench.editor.showTabs": "multiple",
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.startupEditor": "none",
+    "window.menuBarVisibility": "toggle",
+    "window.commandCenter": false,
+
+    // === EDITOR BEHAVIOR ===
+    "editor.lineNumbers": "relative",
+    "editor.cursorStyle": "line",
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.smoothScrolling": true,
+    "editor.scrollBeyondLastLine": false,
+    "editor.wordWrap": "off",
+    "editor.rulers": [80, 120],
+    "editor.renderWhitespace": "boundary",
+    "editor.guides.bracketPairs": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+    "editor.linkedEditing": true,
+
+    // === INTELLISENSE ===
+    "editor.suggestSelection": "first",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "editor.inlineSuggest.enabled": true,
+    "editor.parameterHints.enabled": true,
+
+    // === TERMINAL ===
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.scrollback": 5000,
+    "terminal.integrated.smoothScrolling": true,
+    "terminal.integrated.gpuAcceleration": "on",
+
+    // === FILES ===
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+
+    // === WORKBENCH ===
+    "workbench.list.smoothScrolling": true,
+    "workbench.tree.indent": 14,
+    "workbench.tree.renderIndentGuides": "always",
+
+    // === GIT ===
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    // === LANGUAGE SPECIFIC ===
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[cpp]": {
+        "editor.tabSize": 4
+    },
+    "[java]": {
+        "editor.tabSize": 4
+    },
+
+    // === ROSÉ PINE — disable italics for understated look ===
+    "editor.tokenColorCustomizations": {
+        "[Rosé Pine Moon]": {
+            "textMateRules": [
+                {
+                    "scope": [
+                        "comment",
+                        "entity.other.attribute-name",
+                        "entity.other.inherited-class",
+                        "support.function",
+                        "variable",
+                        "meta.directive.vue"
+                    ],
+                    "settings": { "fontStyle": "" }
+                }
+            ]
+        }
+    },
+
+    // === ERRORLENS ===
+    "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+    "errorLens.fontSize": "12",
+
+    // === PRETTIER ===
+    "prettier.singleQuote": true,
+    "prettier.semi": true,
+    "prettier.tabWidth": 2
+}

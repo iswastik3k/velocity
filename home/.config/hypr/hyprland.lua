@@ -1,7 +1,7 @@
 -- ===== VELOCITY - Hyprland Config =====
 -- User: iswastik3k
--- Theme: Catppuccin Mocha × Hollow Knight
--- Palette: void base, lavender-blue accent, frosted glass surfaces
+-- Theme: Rosé Pine Moon (Mocha-like Dark) × Hollow Knight
+-- Palette: moon base, iris-rose accent, frosted glass surfaces
 
 
 --------------------
@@ -20,11 +20,14 @@ hl.monitor({
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
-hl.env("GTK_THEME", "catppuccin-mocha-lavender-standard+default")
-hl.env("XCURSOR_THEME", "catppuccin-mocha-lavender-cursors")
+hl.env("GTK_THEME", "rose-pine-moon-gtk")
+hl.env("XCURSOR_THEME", "rose-pine-hyprcursor")
+hl.env("HYPRCURSOR_THEME", "rose-pine-hyprcursor")
 hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_THEME", "catppuccin-mocha-lavender-cursors")
 hl.env("HYPRCURSOR_SIZE", "24")
+-- Ensure QT apps know to target Kvantum
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_STYLE_OVERRIDE", "kvantum")
 
 -------------------
 ---- AUTOSTART ----
@@ -42,24 +45,25 @@ end)
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Catppuccin Mocha palette (referenced below)
--- base:    #1e1e2e  mantle:  #181825  crust:   #11111b
--- surface0:#313244  surface1:#45475a  surface2:#585b70
--- lavender:#b4befe  mauve:   #cba6f7  blue:    #89b4fa
--- overlay0:#6c7086
+-- Rosé Pine Moon palette (referenced below)
+-- base:    #232136  mantle:  #2a283e  surface: #393552
+-- overlay: #6e6a86  text:    #e0def4  subtext: #908caa
+-- iris:    #c4a7e7  rose:    #ea9a97  love:    #eb6f92
+-- gold:    #f6c177
 
 hl.config({
     general = {
         gaps_in     = 4,
         gaps_out    = 10,
         border_size = 2,
-        col = {
-            -- mauve → lavender gradient: echoes the Knight mask glow
-            active_border   = { colors = {"0xffcba6f7", "0xffb4befe"}, angle = 45 },
-            -- surface0, nearly invisible — lets wallpaper breathe
-            inactive_border = "0x40313244",
+
+	col = {
+            -- rose → iris gradient: primary accent, echoes the wallpaper glow
+            active_border   = { colors = {"0xffea9a97", "0xffc4a7e7"}, angle = 45 },
+            inactive_border = "0x30393552",
         },
-	resize_on_border = true,
+
+        resize_on_border = true,
         layout = "dwindle",
     },
 
@@ -69,25 +73,27 @@ hl.config({
     env = {},
 
     decoration = {
-        rounding         = 10,
+        rounding         = 12,
         active_opacity   = 0.85,
         inactive_opacity = 0.75,   -- dim inactive, frosted effect reads clearly
 
-        blur = {
+	blur = {
             enabled           = true,
-            size              = 9,      -- frosted glass depth
-            passes            = 3,      -- smoothness
+            size              = 12,     -- heavier frost than Mocha's 9
+            passes            = 4,      -- smoother falloff
             new_optimizations = true,
-            vibrancy          = 0.18,   -- slight color bleed, keeps it alive
-            vibrancy_darkness = 0.4,
+            vibrancy          = 0.22,   -- more color bleed, glassier
+            vibrancy_darkness = 0.5,
+            special           = true,   -- blur special workspaces too
+            popups            = true,   -- blur context menus, tooltips
         },
 
         shadow = {
             enabled      = true,
-            range        = 16,
+            range        = 20,
             render_power = 3,
-            -- dark mauve shadow: grounded in palette, not harsh black
-            color        = "0x66181825",
+            -- dark moon shadow using mantle: grounded in palette, not harsh black
+            color        = "0x662a273f",
         },
     },
 
@@ -102,35 +108,42 @@ hl.config({
     },
 })
 
+hl.window_rule({
+    name = "no-shadows-browser",
+    match = { class = "^firefox$" },
+    no_shadow = true,
+})
+
+hl.window_rule({
+    name = "dolphin-blur",
+    match = { class = "^org%.kde%.dolphin$" },
+    opacity = "0.60 override 0.40 override",
+})
 
 -------------------
 ---- ANIMATIONS ----
 -------------------
 
 -- smooth: slightly springy, fits the floaty butterfly/fog energy
-hl.curve("smooth", { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.05} } })
-hl.curve("drift",  { type = "bezier", points = { {0.25, 0.1}, {0.25, 1}   } })
+hl.curve("glide", { type = "bezier", points = { {0.16, 1}, {0.3, 1} } })
+hl.curve("settle", { type = "bezier", points = { {0.22, 0.05}, {0.2, 1} } })
 
-hl.animation({ leaf = "windows",    enabled = true, speed = 4,   bezier = "smooth", style = "slide"     })
-hl.animation({ leaf = "windowsIn",  enabled = true, speed = 3.5, bezier = "smooth", style = "slide"     })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 3,   bezier = "drift",  style = "slide"     })
-hl.animation({ leaf = "fadeIn",     enabled = true, speed = 3,   bezier = "smooth"                      })
-hl.animation({ leaf = "fadeOut",    enabled = true, speed = 2.5, bezier = "drift"                       })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 4,   bezier = "smooth", style = "slidevert" })
-hl.animation({ leaf = "layers",     enabled = true, speed = 3,   bezier = "smooth"                      })
+hl.animation({ leaf = "windows",    enabled = true, speed = 5,   bezier = "glide",  style = "slide"     })
+hl.animation({ leaf = "windowsIn",  enabled = true, speed = 4.5, bezier = "glide",  style = "popin 92%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 3.5, bezier = "settle", style = "popin 92%" })
+hl.animation({ leaf = "fadeIn",     enabled = true, speed = 4,   bezier = "glide"                        })
+hl.animation({ leaf = "fadeOut",    enabled = true, speed = 3,   bezier = "settle"                        })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 5,   bezier = "glide",  style = "slidevert" })
+hl.animation({ leaf = "layers",     enabled = true, speed = 4,   bezier = "glide"                        })
 
 ---------------------
 ---- LAYER RULES ----
 ---------------------
 ---
-hl.layer_rule({
-    match = { namespace = "waybar" },
-    blur = true,
-})
-
-hl.layer_rule({
-    match = { namespace = "wofi" },
-    blur = true,
+hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
+hl.layer_rule({ 
+    match = { namespace = "wofi" }, 
+    blur = true, 
 })
 
 hl.layer_rule({
@@ -145,16 +158,16 @@ hl.layer_rule({
 hl.config({
     input = {
         kb_layout    = "us",
-	repeat_delay = 145,
-	repeat_rate = 45,
+        repeat_delay = 145,
+        repeat_rate = 45,
         follow_mouse = 1,
         sensitivity  = 1.0,
-	accel_profile = "adaptive",
+        accel_profile = "flat",
         touchpad = {
             natural_scroll = true,
             tap_to_click   = true,
-	    drag_lock = true,
-	    scroll_factor = 0.95,
+            drag_lock = true,
+            scroll_factor = 1.35,
         },
     },
 })
@@ -166,11 +179,14 @@ hl.config({
 
 local mainMod = "SUPER"
 
-hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd("alacritty"))
 hl.bind(mainMod .. " + Q",          hl.dsp.window.close())
 hl.bind(mainMod .. " + R",          hl.dsp.exec_cmd("wofi --show drun"))
 hl.bind(mainMod .. " + F",          hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + V",          hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + E",          hl.dsp.exec_cmd("dolphin"))
+hl.bind(mainMod .. " + B",          hl.dsp.exec_cmd("firefox"))
+hl.bind(mainMod .. " + C",          hl.dsp.exec_cmd("code"))
 
 -- Focus
 hl.bind(mainMod .. " + H",          hl.dsp.focus({ direction = "left"  }))
@@ -185,9 +201,10 @@ hl.bind(mainMod .. " + SHIFT + K",  hl.dsp.window.move({ direction = "up"    }))
 hl.bind(mainMod .. " + SHIFT + J",  hl.dsp.window.move({ direction = "down"  }))
 
 -- Workspaces
-for i = 1, 5 do
-    hl.bind(mainMod .. " + " .. i,          hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. i,  hl.dsp.window.move({ workspace = i }))
+for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
 -- Screenshot
@@ -202,3 +219,7 @@ hl.bind("XF86AudioMute",            hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUD
 -- Brightness
 hl.bind("XF86MonBrightnessUp",      hl.dsp.exec_cmd("brightnessctl set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",    hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true })
+
+-- Manual Lock trigger
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.exec_cmd("~/.local/bin/powermenu.sh"))

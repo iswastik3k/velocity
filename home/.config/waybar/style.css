@@ -1,17 +1,17 @@
 /* ===== VELOCITY - Waybar Style ===== */
-/* Theme: Catppuccin Mocha × Hollow Knight */
+/* Theme: Rosé Pine Moon (Mocha-like Dark) × Hollow Knight */
 
-/* === PALETTE ===
-   base:     #1e1e2e
-   mantle:   #181825
-   surface0: #313244
-   surface1: #45475a
-   overlay0: #6c7086
-   text:     #cdd6f4
-   subtext1: #bac2de
-   lavender: #b4befe
-   mauve:    #cba6f7
-   red:      #f38ba8
+/* === PALETTE (ROSÉ PINE MOON) ===
+   base:     #232136 (Main background)
+   mantle:   #2a283e (Secondary dark)
+   surface:  #393552 (Selection/Borders)
+   overlay:  #6e6a86 (Muted text/Inactive elements)
+   text:     #e0def4 (Primary text)
+   subtext:  #908caa (Secondary text)
+   iris:     #c4a7e7 (Accent color - replacing lavender)
+   rose:     #ea9a97 (Warm accent - replacing mauve)
+   love:     #eb6f92 (Alert/Red - replacing red)
+   gold:     #f6c177 (Warning/Yellow)
 */
 
 * {
@@ -26,8 +26,9 @@
 }
 
 window#waybar {
-    background-color: rgba(30, 30, 46, 0.55);
-    border-bottom: 1px solid rgba(49, 50, 68, 0.5);
+    background-color: rgba(35, 33, 54, 0.55);
+    color: #e0def4;
+    border-bottom: 1px solid rgba(57, 53, 82, 0.4);
 }
 
 /* === LEFT === */
@@ -35,15 +36,19 @@ window#waybar {
 .modules-left {
     padding-left: 8px;
 }
+.modules-right { 
+    padding-right: 8px; 
+}
 
 #custom-arch {
-    color: #b4befe;
+    color: #ea9a97;
     font-size: 16px;
     padding: 0 14px;
+    transition: all 0.2s ease;
 }
 
 #custom-arch:hover {
-    color: #cba6f7;
+    color: #c4a7e7;
 }
 
 #workspaces {
@@ -51,7 +56,7 @@ window#waybar {
 }
 
 #workspaces button {
-    color: #6c7086;
+    color: #6e6a86;
     background: transparent;
     padding: 0 6px;
     min-width: 0;
@@ -60,25 +65,24 @@ window#waybar {
 }
 
 #workspaces button:hover {
-    color: #bac2de;
-    background: transparent;
-    border-bottom: 2px solid #45475a;
+    color: #908caa;
+    border-bottom: 2px solid #393552;
 }
 
 #workspaces button.active {
-    color: #b4befe;
-    border-bottom: 2px solid #b4befe;
+    color: #ea9a97;
+    border-bottom: 2px solid #ea9a97;
 }
 
 #workspaces button.urgent {
-    color: #f38ba8;
-    border-bottom: 2px solid #f38ba8;
+    color: #eb6f92;
+    border-bottom: 2px solid #eb6f92;
 }
 
 /* === CENTER === */
 
 #clock {
-    color: #cdd6f4;
+    color: #e0def4;
     font-weight: 600;
     padding: 0 16px;
     letter-spacing: 0.3px;
@@ -96,9 +100,9 @@ window#waybar {
 #backlight,
 #pulseaudio,
 #battery {
-    color: #bac2de;
+    color: #908caa;
     padding: 0 10px;
-    border-left: 1px solid #313244;
+    border-left: 1px solid rgba(57, 53, 82, 0.4);
 }
 
 #memory:hover,
@@ -106,40 +110,40 @@ window#waybar {
 #network:hover,
 #backlight:hover,
 #pulseaudio:hover {
-    color: #cdd6f4;
+    color: #e0def4;
 }
 
 /* battery states */
 #battery {
-    border-left: 1px solid #313244;
+    border-left: 1px solid #393552;
 }
 
 #battery.charging {
-    color: #b4befe;
+    color: #ea9a97;
 }
 
 #battery.warning {
-    color: #f9e2af;
+    color: #f6c177;
 }
 
 #battery.critical {
-    color: #f38ba8;
+    color: #eb6f92;
 }
 
 #pulseaudio.muted {
-    color: #6c7086;
+    color: #6e6a86;
 }
 
 /* power button */
 #custom-powermenu {
-    color: #f38ba8;
+    color: #eb6f92;
     padding: 0 12px 0 10px;
-    border-left: 1px solid #313244;
+    border-left: 1px solid rgba(57, 53, 82, 0.4);
     font-size: 14px;
     transition: all 0.2s ease;
 }
 
 #custom-powermenu:hover {
-    color: #eba0ac;
-    background: #313244;
+    color: #ea9a97;
+    background: rgba(57, 53, 82, 0.5);
 }

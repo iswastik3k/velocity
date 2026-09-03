@@ -1,5 +1,4 @@
 [global]
-    # === DISPLAY ===
     monitor = 0
     follow = mouse
     width = 320
@@ -9,24 +8,18 @@
     scale = 0
     notification_limit = 3
 
-    # === SPACING ===
     padding = 12
     horizontal_padding = 14
-    text_icon_padding = 0
     separator_height = 1
     separator_color = frame
 
-    # === APPEARANCE ===
-    frame_width = 1
-    frame_color = "#313244"
+    frame_width = 2
+    frame_color = "#393552"
     gap_size = 6
-    corner_radius = 10
-    icon_corner_radius = 4
+    corner_radius = 12
 
-    # === FONT ===
     font = JetBrainsMono Nerd Font 11
 
-    # === TEXT ===
     line_height = 0
     markup = full
     format = "<b>%s</b>\n%b"
@@ -34,55 +27,35 @@
     vertical_alignment = center
     word_wrap = yes
     ellipsize = middle
-    ignore_newline = no
     stack_duplicates = true
-    hide_duplicate_count = false
     show_indicators = no
 
-    # === ICONS ===
-    enable_recursive_icon_lookup = true
-    icon_theme = Papirus-Dark
     icon_position = off
-    min_icon_size = 0
-    max_icon_size = 32
-
-    # === TIMEOUT ===
     show_age_threshold = 60
     sticky_history = yes
     history_length = 20
 
-    # === MISC ===
     dmenu = /usr/bin/wofi --dmenu
-    browser = zen-browser
-    always_run_script = true
-    title = Dunst
-    class = Dunst
-    ignore_dbusclose = false
+    browser = xdg-open
 
-    # === MOUSE ===
     mouse_left_click = close_current
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
 
-# === URGENCY LEVELS ===
-
 [urgency_low]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
-    frame_color = "#313244"
+    background = "#232136"
+    foreground = "#e0def4"
+    frame_color = "#393552"
     timeout = 4
-    override_pause_level = 30
 
 [urgency_normal]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
-    frame_color = "#b4befe"
+    background = "#232136"
+    foreground = "#e0def4"
+    frame_color = "#c4a7e7"
     timeout = 5
-    override_pause_level = 60
 
 [urgency_critical]
-    background = "#1e1e2e"
-    foreground = "#f38ba8"
-    frame_color = "#f38ba8"
+    background = "#232136"
+    foreground = "#eb6f92"
+    frame_color = "#eb6f92"
     timeout = 0
-    override_pause_level = 100

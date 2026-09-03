@@ -4,15 +4,8 @@
     "type": "auto",
     "source": "",
     "color": {
-      "1": "38;2;180;190;254",
-      "2": "38;2;180;190;254",
-      "3": "",
-      "4": "",
-      "5": "",
-      "6": "",
-      "7": "",
-      "8": "",
-      "9": ""
+      "1": "38;2;234;154;151",
+      "2": "38;2;234;154;151"
     },
     "width": null,
     "height": null,
@@ -39,12 +32,12 @@
     "hideCursor": false,
     "separator": ": ",
     "color": {
-      "keys":      "38;2;180;190;254",
-      "title":     "38;2;203;166;247",
-      "output":    "38;2;205;214;244",
-      "separator": "38;2;49;50;68"
+      "keys":      "38;2;234;154;151",
+      "title":     "38;2;196;167;231",
+      "output":    "38;2;224;222;244",
+      "separator": "38;2;57;53;82"
     },
-    "brightColor": true,
+    "brightColor": false,
     "duration": {
       "abbreviation": false,
       "spaceBeforeUnit": "default"
@@ -59,9 +52,9 @@
       "unit": "D",
       "ndigits": 1,
       "color": {
-        "green":  "38;2;166;227;161",
-        "yellow": "38;2;249;226;175",
-        "red":    "38;2;243;139;168"
+        "green":  "38;2;62;143;176",
+        "yellow": "38;2;246;193;119",
+        "red":    "38;2;235;111;146"
       },
       "spaceBeforeUnit": "default"
     },
@@ -72,9 +65,9 @@
       ],
       "ndigits": 0,
       "color": {
-        "green":  "38;2;166;227;161",
-        "yellow": "38;2;249;226;175",
-        "red":    "38;2;243;139;168"
+        "green":  "38;2;62;143;176",
+        "yellow": "38;2;246;193;119",
+        "red":    "38;2;235;111;146"
       },
       "spaceBeforeUnit": "default",
       "width": 0
@@ -127,15 +120,15 @@
       "keyIcon": "",
       "fqdn": false,
       "color": {
-        "user": "38;2;203;166;247",
-        "at":   "38;2;108;112;134",
-        "host": "38;2;180;190;254"
+        "user": "38;2;196;167;231",
+        "at":   "38;2;110;106;134",
+        "host": "38;2;234;154;151"
       }
     },
     {
       "type": "separator",
       "string": "-",
-      "outputColor": "38;2;49;50;68",
+      "outputColor": "38;2;57;53;82",
       "times": 0
     },
     {
@@ -193,7 +186,7 @@
     {
       "type": "separator",
       "string": "-",
-      "outputColor": "38;2;49;50;68",
+      "outputColor": "38;2;57;53;82",
       "times": 0
     },
     {
@@ -257,7 +250,7 @@
     {
       "type": "separator",
       "string": "-",
-      "outputColor": "38;2;49;50;68",
+      "outputColor": "38;2;57;53;82",
       "times": 0
     },
     {

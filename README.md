@@ -112,5 +112,7 @@ See [CHANGELOG.md](CHANGELOG.md) for this variant's release history.
 ---
 
 <div align="center">
-<sub>built by iswastik3k · Arch Linux · 2026 · part of the <a href="https://github.com/iswastik3k/velocity">VELOCITY</a> project</sub>
+<sub>built by iswastik3k · co-built by claude · Arch Linux · 2026</sub>
+<br>
+<sub>- part of the <a href="https://github.com/iswastik3k/velocity">VELOCITY</a> project -</sub>
 </div>
